@@ -1,0 +1,5 @@
+user_id,profile_data,created_at
+1,"{""name"": ""Alice"", ""email"": ""alice@example.com""}",2023-01-02
+2,"{""name"": ""Bob"", ""email"": ""bob@example.com"", ""preferences"": {""newsletter"": true}}",2023-01-05
+3,"invalid_json_here",2023-01-07
+4,"{""name"": ""Cara"", ""email"": ""cara@example.com""}",2023-01-09

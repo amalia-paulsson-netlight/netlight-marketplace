@@ -1,0 +1,5 @@
+order_id,user_id,order_info,order_date
+1001,1,"{""items"": [{""sku"": ""A1"", ""qty"": 2}, {""sku"": ""B2"", ""qty"": 1}]}",2023-01-10
+1002,2,"{""items"": [{""sku"": ""C3"", ""qty"": 1}]}",not_a_date
+1003,4,"{""items"": [{""sku"": ""B2"", ""qty"": 3}]}",2023-01-12
+1004,,null,2023-01-15

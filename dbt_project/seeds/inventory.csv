@@ -1,0 +1,4 @@
+sku,product_name,stock_qty,last_updated
+a1,"Blue Widget",100,2023-01-01
+B2,"red widget",50,2023-01-02
+C3,"Green Widget",,2023-01-03

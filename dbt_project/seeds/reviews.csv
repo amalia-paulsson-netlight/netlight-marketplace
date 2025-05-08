@@ -1,0 +1,5 @@
+review_id,user_id,product_sku,rating,comments,meta_data
+501,1,A1,5,"Great!","{""source"": ""mobile"", ""device"": ""iOS""}"
+502,2,C3,3,,"{""source"": ""web""}"
+503,3,B2,,"Bad quality",
+504,4,B2,4,"Pretty good","{""source"": ""mobile"", ""device"": ""Android""}"
