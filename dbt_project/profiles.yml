@@ -8,4 +8,4 @@ dbt_project:
       password: dbt_pass
       port: 5432
       dbname: dbt_db
-      schema: public
+      schema: default
