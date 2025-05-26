@@ -15,12 +15,14 @@ target-path: "target"        # directory where compiled SQL and artifacts go
 clean-targets: ["target", "dbt_modules"]
 
 models:
-  staging:
-    +schema: staging
-  intermediate:
-    +schema: intermediate
-  marts:
-    +schema: marts
+  netlight_marketplace:
+    +materialized: view
+    staging:
+      +schema: staging
+    intermediate:
+      +schema: intermediate
+    marts:
+      +schema: marts
 
 seeds:
   +schema: raw
