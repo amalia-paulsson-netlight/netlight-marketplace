@@ -54,13 +54,13 @@ You’ll act as a data engineer tasked with:
 ### 1. Clone the Project
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/netlight-marketplace.git
+git clone https://github.com/amalia-paulsson-netlight/netlight-marketplace.git
 cd netlight-marketplace
 ```
 
-Replace YOUR-USERNAME with your actual GitHub username if you forked the repo.
-
 ### 2. cd into this repository and start the Postgres Database
+
+Make sure you have started docker, then run: 
 
 ```bash
 docker-compose up -d
@@ -98,7 +98,7 @@ This loads the raw CSV files from /seeds/ into your local Postgres database.
 dbt run
 ```
 
-This builds SQL models in /models/, cleaning and transforming the raw data into structured, analytical tables. In order to materialize the dbt models that you will define yourself in the tasks below, you run this command again. Read more about dbt [here](https://docs.getdbt.com/).
+This builds SQL models in /models/, cleaning and transforming the raw data into structured, analytical tables. In order to materialize the dbt models that you will define yourself in the tasks below, you run this command again. Make sure to run dbt in your dbt environmenet that was set up in step 3 (```bash source dbt-env/bin/activate ```). Read more about dbt [here](https://docs.getdbt.com/).
 
 ### 7. Explore Data in DBeaver
 
@@ -136,14 +136,27 @@ The seeds/ folder contains various raw datasets from internal and external sourc
 - sellers: Information about sellers on the platform, including seller ID, associated user ID, name, email, join date, and average seller rating.
 - buyers: Information about buyers, including buyer ID, associated user ID, name, email, join date, and historical purchase count.
 
+## Discover the Raw Data
+
+Discover the raw data by querying it in as SQL Editor in DBeaver and reflect around the following topics:
+- Are all there any overlap between users that are in the seller data and the buyer data? What does that mean?
+- In all raw data there's a field batch_loaded_at which is the timestamp of when the data was fetched from the source system and appended to the raw dataset. Hence each set of data with a specific batch_loaded_at value represents a snapshot of how the data looked like in the source system at that point.
+    - How many batch uploads have been made?
+    - How does the number of sellers and buyers differ accross batches?
+    - What does it mean if a seller or buyer occurs in one batch and not in the subsequent one? - What does it mean if the email has changed?
+- Is there uniqueness in the raw data?
+- What other data quality issues do you see?
+
 ## ✅ Tasks
 
 As part of this case, we encourage you to complete the following tasks using dbt models. The goal is to simulate how real data engineers work with raw ingested data and turn it into actionable analytics.
 
 ### 1. 🧹 Staging Layer
-Create staging models in models/staging/ to clean and prepare the raw data.
+Create staging models in models/staging/ to clean and prepare the raw data. Create one staging model on each raw data table.
 
-- Filter out old data — only include rows from the latest batch using the batch_loaded_at column.
+- Filter the data
+    — For each record only include data from the latest batch using the batch_loaded_at column. Make sure you include deleted sellers and buyers.
+    - Filter out and/or fix data that you think is broken.
 - Apply consistent naming and typing conventions.
 - Extract or split relevant fields (e.g. sale_timestamp → sale_date, sale_time).
 
@@ -168,6 +181,7 @@ Create final, analysis-ready tables in models/marts/.
 - Materialisation: Configure these models to be materialised as tables instead of views (default in dbt)
 - Prefix table names: prefix models with "fact_" or "dim_" to indicate whether the data is fact or dimensional
 - Update the listing table: add aggregate view counts per listed item
+- Optional: create dbt tests to check uniqueness, relationships and that mandatory fields are not null in your mart models. Read more on [dbt Tests](https://docs.getdbt.com/docs/build/data-tests)
 
 ### 4. 📊 Business Questions
 Use your mart models (or dbt exposures) to answer questions such as:
